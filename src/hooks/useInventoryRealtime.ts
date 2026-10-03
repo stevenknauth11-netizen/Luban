@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { toast } from 'sonner';
 import type { LabEquipment, EquipmentTransaction } from '@/lib/types';
+import { formatEquipmentName } from '@/lib/types';
 
 interface RealtimeOptions {
   onStockChange?: (payload: { eventType: string; newRecord?: LabEquipment; oldRecord?: Partial<LabEquipment> }) => void;
@@ -40,18 +41,19 @@ export function useInventoryRealtime(options: RealtimeOptions = {}) {
           if (!enableToasts) return;
 
           if (eventType === 'INSERT' && newRecord) {
-            toast.success(`Nuevo Activo Registrado: ${newRecord.name}`, {
+            toast.success(`Nuevo Activo Registrado: ${formatEquipmentName(newRecord.name)}`, {
               description: `${newRecord.total_quantity} uds. en ${newRecord.location || 'Laboratorio'}.`,
               duration: 4000,
             });
           } else if (eventType === 'UPDATE' && newRecord) {
+            const formatted = formatEquipmentName(newRecord.name);
             if (newRecord.condition === 'Requiere Mantenimiento' || newRecord.condition === 'Dañado/Baja') {
-              toast.error(`Alerta Técnica: ${newRecord.name}`, {
+              toast.error(`Alerta Técnica: ${formatted}`, {
                 description: `Estado alterado a: ${newRecord.condition}.`,
                 duration: 6000,
               });
             } else if (newRecord.available_quantity <= (newRecord.min_threshold ?? 3)) {
-              toast.warning(`Disponibilidad Reducida: ${newRecord.name}`, {
+              toast.warning(`Disponibilidad Reducida: ${formatted}`, {
                 description: `Solo quedan ${newRecord.available_quantity} unidades disponibles para clase.`,
                 duration: 5000,
               });

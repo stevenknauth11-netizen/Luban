@@ -12,6 +12,11 @@ import {
   MapPin,
   FileText,
   Package,
+  Monitor,
+  Fingerprint,
+  Network,
+  Boxes,
+  Maximize2,
 } from 'lucide-react';
 
 interface EquipmentCardProps {
@@ -21,6 +26,18 @@ interface EquipmentCardProps {
 
 function getCategoryIcon(categoryName: string) {
   const cat = categoryName.toLowerCase();
+  if (cat.includes('hmi') || cat.includes('pantalla') || cat.includes('teclado') || cat.includes('interfa')) {
+    return Monitor;
+  }
+  if (cat.includes('biometr') || cat.includes('huella')) {
+    return Fingerprint;
+  }
+  if (cat.includes('red') || cat.includes('ethernet') || cat.includes('comunic')) {
+    return Network;
+  }
+  if (cat.includes('expansi')) {
+    return Maximize2;
+  }
   if (cat.includes('iot') || cat.includes('micro') || cat.includes('stm') || cat.includes('esp')) {
     return Cpu;
   }
@@ -32,6 +49,9 @@ function getCategoryIcon(categoryName: string) {
   }
   if (cat.includes('herramienta') || cat.includes('soldad')) {
     return Wrench;
+  }
+  if (cat.includes('consumible') || cat.includes('fungible')) {
+    return Boxes;
   }
   if (cat.includes('instrument') || cat.includes('oscil')) {
     return ActivityIcon;

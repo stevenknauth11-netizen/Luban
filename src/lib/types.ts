@@ -9,9 +9,14 @@ export type LabCategory =
   | 'IoT'
   | 'Automatización'
   | 'Mecatrónica'
+  | 'Interfaces HMI'
+  | 'Sensores y Biometría'
+  | 'Comunicaciones y Red'
+  | 'Módulos de Expansión'
   | 'Diseño CAD'
   | 'Herramienta'
   | 'Instrumentación'
+  | 'Consumibles y Fungibles'
   | 'General';
 
 export type EquipmentCondition =
@@ -186,9 +191,14 @@ export const LAB_CATEGORIES: LabCategory[] = [
   'IoT',
   'Automatización',
   'Mecatrónica',
+  'Interfaces HMI',
+  'Sensores y Biometría',
+  'Comunicaciones y Red',
+  'Módulos de Expansión',
   'Diseño CAD',
   'Herramienta',
   'Instrumentación',
+  'Consumibles y Fungibles',
   'General',
 ];
 

@@ -21,12 +21,19 @@ VALUES
   ('IoT', 'Microcontroladores, gateways perimetrales, conectividad Wi-Fi y protocolos de comunicación.', true),
   ('Automatización', 'Autómatas programables (PLC), contactores industriales, relevadores y módulos de potencia.', true),
   ('Mecatrónica', 'Servomotores, motores a pasos, actuadores lineales, drivers y sistemas electromecánicos.', true),
+  ('Interfaces HMI', 'Pantallas gráficas LCD, teclados matriciales, displays táctiles y paneles de interfaz hombre-máquina.', true),
+  ('Sensores y Biometría', 'Lectores biométricos dactilares, sensores de temperatura, humedad, distancia y variables físicas.', true),
+  ('Comunicaciones y Red', 'Módulos de red Ethernet, transceptores bus CAN, RS485 y enlaces de comunicación industrial.', true),
+  ('Módulos de Expansión', 'Placas de expansión de funciones I/O, shields periféricos y adaptadores didácticos de señales.', true),
   ('Diseño CAD', 'Kits de modelado 3D, impresión de filamento, escaneo tridimensional y piezas estructurales.', true),
   ('Herramienta', 'Estaciones de soldadura, multímetros portátiles, pinzas de precisión y herramienta manual de banco.', true),
   ('Instrumentación', 'Osciloscopios de banco, generadores de funciones, fuentes DC reguladas y analizadores lógicos.', true),
   ('Consumibles y Fungibles', 'Estaño de soldadura, filamento PLA, resistencias, jumpers, pasta térmica y componentes no retornables.', true),
   ('General', 'Accesorios de laboratorio, fuentes de alimentación universales y adaptadores didácticos.', true)
-ON CONFLICT (name) DO NOTHING;
+ON CONFLICT (name) DO UPDATE SET description = EXCLUDED.description, is_active = true;
+
+-- Liberar constraint restrictivo de categorías para permitir dinámicas
+ALTER TABLE public.lab_equipment DROP CONSTRAINT IF EXISTS lab_equipment_category_check;
 
 -- 2. EVOLUCIÓN DE LA TABLA lab_equipment HACIA CATÁLOGO EDUCATIVO
 DO $$
