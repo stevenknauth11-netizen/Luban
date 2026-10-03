@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+/* ============================================================
+   TALLER LUBAN — Industrial Design System
+   Premium ERP-grade UI tokens (SAP/Linear aesthetic)
+   ============================================================ */
+
+@theme {
+  /* Brand Palette */
+  --color-luban-red: #CC0000;
+  --color-luban-red-dark: #A30000;
+  --color-luban-red-light: #FF1A1A;
+
+  --color-navy: #0F172A;
+  --color-navy-light: #1E293B;
+
+  --color-slate-50: #F8FAFC;
+  --color-slate-100: #F1F5F9;
+  --color-slate-200: #E2E8F0;
+  --color-slate-300: #CBD5E1;
+  --color-slate-400: #94A3B8;
+  --color-slate-500: #64748B;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1E293B;
+  --color-slate-900: #0F172A;
+
+  --color-success: #059669;
+  --color-warning: #D97706;
+  --color-danger: #DC2626;
+  --color-info: #2563EB;
+
+  /* Typography */
+  --font-sans: 'Inter', 'Roboto', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+
+  /* Spacing scale */
+  --spacing-sidebar: 260px;
+}
+
+/* Global resets */
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus ring — industrial precision, not soft blobs */
+*:focus-visible {
+  outline: 2px solid var(--color-luban-red);
+  outline-offset: 2px;
+}
+
+/* Scrollbar — slim, industrial */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-slate-100);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-slate-400);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-slate-500);
+}
+
+/* Table striping */
+.table-row-striped:nth-child(even) {
+  background-color: var(--color-slate-50);
+}
+
+/* Status badge base */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+.badge-success {
+  color: #065F46;
+  background-color: #D1FAE5;
+}
+.badge-warning {
+  color: #92400E;
+  background-color: #FEF3C7;
+}
+.badge-danger {
+  color: #991B1B;
+  background-color: #FEE2E2;
+}
+.badge-info {
+  color: #1E40AF;
+  background-color: #DBEAFE;
+}
+
+/* Button base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 150ms ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: var(--color-luban-red);
+  color: white;
+  border-color: var(--color-luban-red);
+}
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-luban-red-dark);
+}
+
+.btn-secondary {
+  background-color: white;
+  color: var(--color-slate-700);
+  border-color: var(--color-slate-300);
+}
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--color-slate-50);
+  border-color: var(--color-slate-400);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-slate-600);
+}
+.btn-ghost:hover:not(:disabled) {
+  background-color: var(--color-slate-100);
+  color: var(--color-slate-900);
+}
+
+.btn-danger {
+  background-color: var(--color-danger);
+  color: white;
+  border-color: var(--color-danger);
+}
+.btn-danger:hover:not(:disabled) {
+  background-color: #B91C1C;
+}
+
+/* Card */
+.card {
+  background: white;
+  border: 1px solid var(--color-slate-200);
+  border-radius: 8px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+/* Input fields */
+.input-field {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-slate-900);
+  background: white;
+  border: 1px solid var(--color-slate-300);
+  border-radius: 6px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-luban-red);
+  box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.1);
+}
+.input-field::placeholder {
+  color: var(--color-slate-400);
+}
+
+/* Select */
+.select-field {
+  appearance: none;
+  width: 100%;
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--color-slate-900);
+  background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748B' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 6l3.5 4 3.5-4z'/%3E%3C/svg%3E") no-repeat right 0.5rem center;
+  background-size: 1rem;
+  border: 1px solid var(--color-slate-300);
+  border-radius: 6px;
+  transition: border-color 150ms ease;
+}
+.select-field:focus {
+  outline: none;
+  border-color: var(--color-luban-red);
+  box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.1);
+}
+
+/* Animation - subtle fade in for page transitions */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn {
+  animation: fadeIn 200ms ease-out;
+}
+
+/* Loading pulse */
+@keyframes pulse-border {
+  0%, 100% { border-color: var(--color-slate-200); }
+  50% { border-color: var(--color-luban-red); }
+}
+.skeleton {
+  animation: pulse-border 1.5s infinite;
+}
+
+/* Reglas de impresión aislada para etiquetas QR */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-label,
+  #printable-label * {
+    visibility: visible;
+  }
+  #printable-label {
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin: 0 !important;
+    padding: 16px !important;
+    width: 320px !important;
+    border: 2px solid black !important;
+    box-shadow: none !important;
+    background: white !important;
+  }
+}
