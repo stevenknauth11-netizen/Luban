@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import type { LabEquipment, EquipmentCategoryRecord } from '@/lib/types';
 import { EquipmentCard } from './EquipmentCard';
+import { exportInatecLabReport } from '@/lib/exportToExcel';
 import {
   Search,
   LayoutGrid,
@@ -13,6 +14,7 @@ import {
   Sparkles,
   CheckCircle2,
   AlertTriangle,
+  Download,
 } from 'lucide-react';
 
 interface CatalogClientProps {
@@ -104,8 +106,26 @@ export function CatalogClient({
             </p>
           </div>
 
-          {/* Toggle de Vistas (Grid vs. List) */}
-          <div className="flex items-center gap-2.5 self-start md:self-auto">
+          {/* Toggle de Vistas y Descarga Excel */}
+          <div className="flex items-center gap-2.5 self-start md:self-auto flex-wrap">
+            <button
+              type="button"
+              onClick={() =>
+                exportInatecLabReport(filteredEquipment, [], {
+                  category: selectedCategory,
+                  searchQuery,
+                })
+              }
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 hover:border-emerald-300 transition-colors shadow-2xs"
+              title="Descargar reporte oficial en formato Excel (.xlsx)"
+            >
+              <Download className="w-3.5 h-3.5 text-emerald-600" />
+              <span>
+                Exportar Excel{' '}
+                {selectedCategory !== 'all' ? `(${filteredEquipment.length})` : `(${filteredEquipment.length})`}
+              </span>
+            </button>
+
             <div className="flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200">
               <button
                 type="button"
