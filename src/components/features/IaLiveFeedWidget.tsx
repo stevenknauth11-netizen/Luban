@@ -92,6 +92,7 @@ export function IaLiveFeedWidget({ initialEvents }: IaLiveFeedWidgetProps) {
             const rawEqName = tx.lab_equipment?.name || `Activo #${tx.equipment_id}`;
             const eqName = formatEquipmentName(rawEqName);
             const location = tx.lab_equipment?.location || 'Mesa Principal';
+            const isAi = tx.action === 'AUDITORIA_IA' || Boolean(tx.notes?.toLowerCase().includes('ia'));
 
             return (
               <div
